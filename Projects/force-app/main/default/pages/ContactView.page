@@ -1,0 +1,10 @@
+<apex:page standardController="Contact" >
+    <apex:pageBlock title="ContactView">
+    <apex:pageBlockSection >
+        
+        First Name: {!Contact.Firstname}<br/>
+        Last Name: {!Contact.Lastname}<br/>
+        Owner Email: {!Contact.Owner.Email}<br/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

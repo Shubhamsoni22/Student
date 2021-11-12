@@ -1,0 +1,56 @@
+<apex:page controller="RelateInstitute">
+    <apex:form >
+        <apex:selectList value="{!selectInst}" size="1">
+            <apex:selectOptions value="{!instituteList}" ></apex:selectOptions>
+            <apex:actionSupport action="{!displayMentors}" event="onchange" reRender="first"/>
+        </apex:selectList>
+        <apex:outputPanel id="first" >
+            <apex:outputPanel rendered="{!displayMentor}">                
+                <br/>
+                <table border="2">
+                    <apex:outputLabel value="All Mentors" />
+                    <tr>
+                        <th>Mentor Name</th>
+                        <th >Designation</th>
+                    </tr>                          
+                    <apex:repeat value="{!mentorList}" var="mentor">
+                        <tr>
+                            <td>
+                                <apex:commandLink action="{!showStudents}" value="{!mentor.Name}"> 
+                                    <apex:param name="mentorId" assignTo="{!selectId}" value="{!mentor.id}" />
+                                </apex:commandLink>
+                            </td>
+                            <td>
+                                {!Mentor.Designation__c}
+                            </td>
+                        </tr>                    
+                        <apex:outputPanel rendered="{!IF(selectId==mentor.id,true,false)}">
+                            <tr >
+                                <td colspan="2">
+                                    <table border="2">                                     
+                                        <tr>    
+                                            
+                                            <th>Student Name</th>
+                                            <th>Class</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                        </tr>
+                                        <apex:repeat value="{!studentList}" var="student">
+                                            <tr>                                           
+                                                <td>{!student.Name}</td>
+                                                <td>{!student.Class__c}</td>
+                                                <td>{!student.City__c}</td>
+                                                <td>{!student.State__c}</td>
+                                            </tr>
+                                        </apex:repeat>                                         
+                                    </table>  
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+    </apex:form>
+</apex:page>
